@@ -38,14 +38,18 @@ var createBoard = function(){
         
          var cardElement = document.createElement('div');
          cardElement.className ='card';
+         
+         cardElement.setAttribute('data-card',cards[i]);
+         cardElement.addEventListener('click',addImg);
          gameBoard.appendChild(cardElement);
-         cardElements[i] = cardElement;
-         cardElements[i].setAttribute('data-card', cards[i]);
-         cardElements[i].addEventListener('click', addImg);
-         cardElements[i].addEventListener('click', isTwoCards);
+          
+          cardElements[i] = cardElement;
+//         cardElements[i].setAttribute('data-card', cards[i]);
+//         cardElements[i].addEventListener('click', addImg);
+       cardElements[i].addEventListener('click', isTwoCards);
                                     
          //defining function, add clicked card to cardsInPlay and triggers our test if we win
-         var isTwoCards = function() {
+         function isTwoCards() {
             cardsInPlay.push(this.getAttribute('data-card'));
             if (cardsInPlay.length === 2) {
                 isMatch(cardsInPlay);
@@ -54,7 +58,7 @@ var createBoard = function(){
          }; 
          
          //defining function, adds image to clicked card
-         var addImg = function() {
+         function addImg() {
             if (this.getAttribute('data-card') == "king") {
                 this.innerHTML = "<img src='king.png' alt='King' />"}
             else {
